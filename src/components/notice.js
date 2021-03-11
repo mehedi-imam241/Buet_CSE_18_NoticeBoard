@@ -37,8 +37,8 @@ export default function Notice({ value }) {
       .then(async function (response) {
         alert(response.data);
         if (
-          notice.noticeImageLink != undefined &&
-          notice.noticeImageLink != null
+          notice.noticeImageLink !== undefined &&
+          notice.noticeImageLink !== null
         ) {
           config = {
             method: "delete",
