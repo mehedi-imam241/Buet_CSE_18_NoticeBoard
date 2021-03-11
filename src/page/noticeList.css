@@ -1,0 +1,40 @@
+.noticeList {
+  margin: 3vw;
+}
+#noticeList-input {
+  width: 40%;
+  box-sizing: border-box;
+  margin-top: 3vh;
+  margin-bottom: 7vh;
+  border-radius: 4px;
+  border-color: var(--primary-color);
+  border-width: 3px;
+  font-size: var(--font-paragraph);
+  background-color: #f1f1f1;
+  background-image: url("../assets/search.png");
+  background-position: 7px 8px;
+  background-repeat: no-repeat;
+  padding: 12px 20px 12px 40px;
+  -webkit-transition: width 0.4s ease-in-out;
+  transition: width 0.4s ease-in-out;
+  outline: none;
+}
+#noticeList-input:focus {
+  width: 60%;
+  border-width: 5px;
+}
+@media screen and (max-width: 600px) {
+  #noticeList-input {
+    width: 80%;
+  }
+  #noticeList-input:focus {
+    width: 97%;
+    border-width: 5px;
+  }
+}
+.center {
+  margin: auto;
+  width: 5%;
+  margin-top: 40vh;
+  padding: 10px;
+}
