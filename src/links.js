@@ -1,5 +1,5 @@
-const MAIN_LINK = "http://52.188.17.147:8080";
-// const MAIN_LINK = "http://localhost:8080";
+// const MAIN_LINK = "http://52.188.17.147:8080";
+const MAIN_LINK = "http://localhost:8080";
 
 export const ADMIN_AUTHENTICATE_LINK = MAIN_LINK + "/authenticate";
 export const ADMIN_CREATE_NOTICE =
