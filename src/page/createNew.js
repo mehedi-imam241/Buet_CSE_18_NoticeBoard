@@ -13,7 +13,6 @@ import { NoticeContext } from "../context/noticeProvider";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import FormData from "form-data";
-import { LoadingInformationContext } from "../context/loadingInformationProvider";
 import Spinner from "react-spinner-material";
 
 export default function CreateNew() {
@@ -25,7 +24,10 @@ export default function CreateNew() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (notice.noticeImageLink !== undefined) {
+    if (
+      notice.noticeImageLink !== undefined &&
+      notice.noticeImageLink !== null
+    ) {
       setImage(VIEW_IMAGE + notice.noticeImageLink);
       urlToObject(VIEW_IMAGE + notice.noticeImageLink);
     }
@@ -33,6 +35,7 @@ export default function CreateNew() {
       setValues({
         ...notice,
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const [values, setValues] = useState({
@@ -44,7 +47,7 @@ export default function CreateNew() {
     noticeAttachmentLink: "",
   });
 
-  const [token, useToken] = useContext(tokenContext);
+  const [token] = useContext(tokenContext);
 
   const urlToObject = async (image) => {
     const response = await fetch(image);
@@ -74,7 +77,6 @@ export default function CreateNew() {
       return;
     }
     setImage(URL.createObjectURL(event.target.files[0]));
-    console.log(event.target.files[0]);
     setImageFile(event.target.files[0]);
     setImageError("");
   };
@@ -89,6 +91,7 @@ export default function CreateNew() {
       noticeIsMadeBy: event.target.value,
     }));
   };
+
   const onDescriptionChange = (event) => {
     setValues((values) => ({
       ...values,
@@ -102,7 +105,7 @@ export default function CreateNew() {
     }));
   };
   const onTopicChange = (event) => {
-    if (event.target.value.length >= 25) {
+    if (event.target.value.length >= 35) {
       return;
     }
     setValues((values) => ({
@@ -206,7 +209,7 @@ export default function CreateNew() {
           });
       })
       .catch(function (error) {
-        console.log(error);
+        // console.log(error);
         config = {
           method: Object.keys(notice).length !== 0 ? "put" : "post",
           url:
@@ -233,11 +236,11 @@ export default function CreateNew() {
         axios(config)
           .then(function (response) {
             alert(response.data);
-            setImage();
             history.go(0);
-            history.push("/", null);
           })
-          .catch(function (error) {});
+          .catch(function (error) {
+            alert("Task Failed.");
+          });
       });
   };
 

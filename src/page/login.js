@@ -11,7 +11,7 @@ export default function Login() {
     password: "",
   });
   const history = useHistory();
-  const [token, setToken] = useContext(tokenContext);
+  const [setToken] = useContext(tokenContext);
 
   const [error, setError] = useState("");
 

@@ -15,16 +15,12 @@ import Backward from "../assets/backward.png";
 import Spinner from "react-spinner-material";
 
 export default function NoticeList() {
-  const [token, useToken] = useContext(tokenContext);
+  const [token] = useContext(tokenContext);
   const [noticeList, setNoticeList] = useContext(NoticeListContext);
   const [onSearchStage, setOnSearchStage] = useState(false);
   var [page, setPage] = useState(0);
 
   const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    updateNoticeList();
-  }, []);
 
   const updateNoticeList = () => {
     var config = {
@@ -47,6 +43,11 @@ export default function NoticeList() {
         console.log(error);
       });
   };
+
+  useEffect(() => {
+    updateNoticeList();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const onClickForWard = (e) => {
     e.persist();
@@ -73,7 +74,7 @@ export default function NoticeList() {
         },
       };
 
-      console.log(config);
+      // console.log(config);
       axios(config)
         .then(function (response) {
           setNoticeList(

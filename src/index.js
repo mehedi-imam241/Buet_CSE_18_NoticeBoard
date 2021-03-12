@@ -6,16 +6,13 @@ import { BrowserRouter } from "react-router-dom";
 import { TokenProvider } from "./context/tokenProvider";
 import { NoticeListProvider } from "./context/noticeListProvider";
 import { NoticeProvider } from "./context/noticeProvider";
-import { LoadingInformationProvider } from "./context/loadingInformationProvider";
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <NoticeListProvider>
         <NoticeProvider>
           <TokenProvider>
-            <LoadingInformationProvider>
-              <App />
-            </LoadingInformationProvider>
+            <App />
           </TokenProvider>
         </NoticeProvider>
       </NoticeListProvider>
