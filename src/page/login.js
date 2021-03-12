@@ -11,7 +11,7 @@ export default function Login() {
     password: "",
   });
   const history = useHistory();
-  const [setToken] = useContext(tokenContext);
+  const [token, setToken] = useContext(tokenContext);
 
   const [error, setError] = useState("");
 
@@ -49,7 +49,7 @@ export default function Login() {
         history.push("/");
       })
       .catch(function (error) {
-        console.log(error);
+        alert("Login failed. Try again");
       });
   };
 

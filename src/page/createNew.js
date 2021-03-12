@@ -22,6 +22,7 @@ export default function CreateNew() {
   const [notice, setNotice] = useContext(NoticeContext);
   const history = useHistory();
   const [loading, setLoading] = useState(false);
+  const [isValidUrl, setIsValidUrl] = useState();
 
   useEffect(() => {
     if (
@@ -98,7 +99,25 @@ export default function CreateNew() {
       noticeDescription: event.target.value,
     }));
   };
+
+  const isUrl = (string) => {
+    try {
+      return Boolean(new URL(string));
+    } catch (e) {
+      return false;
+    }
+  };
+
   const onAttachMentChange = (event) => {
+    if (event.target.value === "") {
+      console.log(event.target.value);
+      setIsValidUrl(true);
+    } else if (!isUrl(event.target.value)) {
+      setIsValidUrl(false);
+    } else {
+      setIsValidUrl(true);
+    }
+
     setValues((values) => ({
       ...values,
       noticeAttachmentLink: event.target.value,
@@ -121,6 +140,10 @@ export default function CreateNew() {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (isValidUrl === false) {
+      return;
+    }
 
     if (
       values.noticeDate.toString() === "" ||
@@ -275,7 +298,13 @@ export default function CreateNew() {
         onChange={onAttachMentChange}
         value={values.noticeAttachmentLink}
       />
-
+      {!isValidUrl ? (
+        <p style={{ color: "red", fontSize: "15px", margin: 0 }}>
+          Link not valid
+        </p>
+      ) : (
+        <p></p>
+      )}
       <p> Notice Details* </p>
       <textarea
         name="textarea"

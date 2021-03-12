@@ -80,7 +80,12 @@ export default function Notice({ value }) {
         <div className="synopsis">
           {value.noticeDescription}{" "}
           {value.noticeAttachmentLink ? (
-            <a className="more" href={value.noticeAttachmentLink.toString()}>
+            <a
+              className="more"
+              href={value.noticeAttachmentLink.toString()}
+              target="_blank"
+              rel="noreferrer"
+            >
               Attachment
             </a>
           ) : (
